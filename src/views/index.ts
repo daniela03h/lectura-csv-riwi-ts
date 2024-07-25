@@ -1,3 +1,6 @@
+import {processData} from '../controllers/file.controllers'
+import { Idata } from '../models/file.model'
+
 const inputFile = document.querySelector("#file-input") as HTMLInputElement
 
 window.addEventListener("DOMContentLoaded", () => {
@@ -22,36 +25,46 @@ function onFileChange() {
 
     reader.addEventListener('load', (event) => {
         const csv = event.target?.result as string
-        processData(csv)
+        const result = processData(csv)
+        console.log("result", result);
+        renderTable(result)
+
     })
 
     reader.readAsText(file)
 }
 
-function processData(csv: string) {
-    const rows = csv.split('\n')
+function renderTable(data: Idata[]) {
+    const container = document.querySelector(".container");
 
-    const data = []
+     if (!container) {
+        console.error("No se encontró el contenedor .container");
+        return;
+    } 
 
-    rows.forEach((row: string, index: number)=>{
-        if(index === 0){
-            return
-        }
-        const columns = row.split(',')
-        
-        const dataColumn = {
-            region: columns[0],
-            codigoDaneDepartamento: columns[1],
-            departamento: columns[2],
-            codigoDaneMunicipio: columns[3],
-            municipio: columns[4]
-        }
-        
-        data.push(dataColumn)
-    })
-
-    console.log(data);
-    
-
+    container.innerHTML = `
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">REGION</th>
+                    <th scope="col">CÓDIGO DANE DEL DEPARTAMENTO</th>
+                    <th scope="col">DEPARTAMENTO</th>
+                    <th scope="col">CÓDIGO DANE DEL MUNICIPIO</th>
+                    <th scope="col">MUNICIPIO</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${data.map(item => `
+                    <tr>
+                        <th scope="row">${item.region}</th>
+                        <td>${item.codigoDaneDepartamento}</td>
+                        <td>${item.departamento}</td>
+                        <td>${item.codigoDaneMunicipio}</td>
+                        <td>${item.municipio}</td>
+                    </tr>
+                `).join('')}
+            </tbody>
+        </table>
+    `;
 }
 
