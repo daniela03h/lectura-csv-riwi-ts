@@ -1,4 +1,4 @@
-export interface Idata {
+export interface IDaneData {
     region: string,
     codigoDaneDepartamento: string,
     departamento: string,

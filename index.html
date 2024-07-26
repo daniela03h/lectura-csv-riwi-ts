@@ -1,34 +1,28 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./src/scss/index.scss">
-    <title>Lectura Archivo CSV - TypeScript</title>
-  </head>
-  <body>
-    <div class="container conta">
-      <form>
-        <input type="file" accept=".csv" id="file-input" />
-      </form>
-      <div class="container-list">
-        <table>
-          <!-- <thead>
-            <tr>
-              <th scope="col">REGION</th>
-              <th scope="col">CÓDIGO DANE DEL DEPARTAMENTO</th>
-              <th scope="col">DEPARTAMENTO</th>
-              <th scope="col">CÓDIGO DANE DEL MUNICIPIO</th>
-              <th scope="col">MUNICIPIO</th>
-            </tr>
-          </thead>
-          <tbody>
 
-          </tbody> -->
-        </table>
-      </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/scss/index.scss">
+  <title>Lectura Archivo CSV - TypeScript</title>
+</head>
+
+<body>
+  <h1>Riwi File</h1>
+  <div class="container">
+    <form>
+      <input type="file" accept=".csv" id="file-input" />
+    </form>
+    <form class="form-search" >
+      <input type="text" class="input-search" />
+      <button type="submit">Buscar</button>
+    </form>
+    <div class="container-list">
+      <!-- Here is going to be rendered the dane data -->
     </div>
-    <script type="module" src="/src/views/index.ts"></script>
-  </body>
+  </div>
+  <script type="module" src="/src/views/index.ts"></script>
+</body>
+
 </html>

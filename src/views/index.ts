@@ -1,10 +1,18 @@
 import {processData} from '../controllers/file.controllers'
-import { Idata } from '../models/file.model'
+import { IDaneData } from '../models/file.model'
 
 const inputFile = document.querySelector("#file-input") as HTMLInputElement
+//const formSearch = document.querySelector(".form-search") as HTMLFormElement
+const inputSearch = document.querySelector(".input-search") as HTMLInputElement
+
+let dataDane: IDaneData[] = []
+
+// let limitPage = 15 
+// let init =
 
 window.addEventListener("DOMContentLoaded", () => {
     inputFile.addEventListener("change", onFileChange)
+    inputSearch.addEventListener("input", onSearchSubmit)
 })
 
 function onFileChange() {
@@ -25,22 +33,36 @@ function onFileChange() {
 
     reader.addEventListener('load', (event) => {
         const csv = event.target?.result as string
-        const result = processData(csv)
-        console.log("result", result);
-        renderTable(result)
+        dataDane = processData(csv)
+        console.log("result", dataDane);
+        renderTable(dataDane)
 
     })
 
     reader.readAsText(file)
 }
 
-function renderTable(data: Idata[]) {
-    const container = document.querySelector(".container");
+function onSearchSubmit(event:Event) {
+    event.preventDefault()
+    const result = inputSearch.value.toLowerCase()
+    const dataFilter = dataDane.filter((item) => {
+        const region = item.region?.toLowerCase() || '';
+        const codigoDaneDepartamento = item.codigoDaneDepartamento?.toLowerCase() || '';
+        const departamento = item.departamento?.toLowerCase() || '';
+        const codigoDaneMunicipio = item.codigoDaneMunicipio?.toLowerCase() || '';
+        const municipio = item.municipio?.toLowerCase() || '';
 
-     if (!container) {
-        console.error("No se encontró el contenedor .container");
-        return;
-    } 
+        return region.includes(result) ||
+        codigoDaneDepartamento.includes(result) ||
+        departamento.includes(result) ||
+        codigoDaneMunicipio.includes(result) ||
+        municipio.includes(result)
+    })
+    renderTable(dataFilter)
+}
+
+function renderTable(data: IDaneData[]) {
+    const container = document.querySelector(".container-list") as HTMLDivElement;
 
     container.innerHTML = `
         <table class="table">
@@ -54,7 +76,9 @@ function renderTable(data: Idata[]) {
                 </tr>
             </thead>
             <tbody>
-                ${data.map(item => `
+                ${data.map(item => 
+                    
+                    `
                     <tr>
                         <th scope="row">${item.region}</th>
                         <td>${item.codigoDaneDepartamento}</td>
