@@ -1,7 +1,5 @@
 import { IDaneData } from '../models/file.model'
 
-
-
 // Definicion de la clase del controlador
 export class FileController {
     //Funcion que se encarga de convertir los datos que se leyeron el archivo a un objeto
