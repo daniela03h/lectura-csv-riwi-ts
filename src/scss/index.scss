@@ -1,0 +1,10 @@
+@import "./styles.scss";
+
+.btn-first, .btn-last {
+    width: 100px;
+} 
+
+#items {
+    max-width: calc(100% - 200px);
+    overflow: auto;
+}

@@ -1,13 +1,43 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="./src/scss/index.scss">
+  <title>Lectura Archivo CSV - TypeScript</title>
+</head>
+
+<body class="container text-center d-flex gap-3 flex-column">
+  <h1>Riwi File</h1>
+  <div class="container">
+    <form>
+      <input type="file" accept=".csv" id="file-input" />
+    </form>
+  </div>
+
+  <div>
+    <label for="search">Buscar</label>
+    <input type="text" class="input-search" id="search" />
+    <div class="container-list">
+      <!-- Aqui se muestran los datos -->
+    </div>
+  </div>
+
+  <nav class="container">
+    <ul class="pagination gap-1">
+      <li class="page-item btn-first">
+        <button class="page-link button-previous">Previous</button>
+      </li>
+      <div id="items" class="d-flex">
+        <!-- Aqui se muesta la paginación dinamicamente -->
+      </div>
+      <li class="page-item btn-last">
+        <button class="page-link button-next">Next</button>
+      </li>
+    </ul>
+  </nav>
+  <script type="module" src="/src/views/index.ts"></script>
+</body>
+
 </html>
