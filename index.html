@@ -8,13 +8,17 @@
   <title>Lectura Archivo CSV - TypeScript</title>
 </head>
 
-<body>
+<body class="container text-center d-flex gap-3 flex-column">
   <h1>Riwi File</h1>
   <div class="container">
     <form>
       <input type="file" accept=".csv" id="file-input" />
     </form>
-    <input type="text" class="input-search" />
+  </div>
+
+  <div>
+    <label for="search">Buscar</label>
+    <input type="text" class="input-search" id="search" />
     <div class="container-list">
       <!-- Aqui se muestran los datos -->
     </div>

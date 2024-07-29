@@ -77,7 +77,7 @@ function onSearchSubmit() {
             codigoDaneMunicipio.includes(result) ||
             municipio.includes(result)
     })
-    renderTable(dataFilter)
+    renderTable(dataFilter.slice(0, 14))
 }
 
 
@@ -86,7 +86,6 @@ function renderTable(data: IDaneData[]) {
     const container = document.querySelector(".container-list") as HTMLDivElement;
 
     container.innerHTML = `
-    <h3>${pageActive}</h3>
         <table class="table">
             <thead>
                 <tr>
@@ -111,7 +110,7 @@ function renderTable(data: IDaneData[]) {
         </table>
     `;
 
-
+    (document.querySelector("#items") as HTMLDivElement).innerHTML = ''
     for (let i = 0; i < pages; i++) {
         const item = document.createElement('li') as HTMLLIElement
         item.classList.add('page-item')
